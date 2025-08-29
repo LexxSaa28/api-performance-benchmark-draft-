@@ -1,6 +1,0 @@
-{
-  "target": "localhost:9000",
-  "protocol": "grpc",
-  "concurrency": 50,
-  "duration": 30
-}
