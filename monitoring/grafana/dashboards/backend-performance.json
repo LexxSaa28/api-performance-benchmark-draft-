@@ -1,0 +1,384 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Backend Performance Monitoring - gRPC & WebSocket",
+    "tags": ["loadtest", "grpc", "websocket", "backend"],
+    "style": "dark",
+    "timezone": "browser",
+    "refresh": "5s",
+    "time": {
+      "from": "now-30m",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "title": "🚀 Overview - Throughput Summary",
+        "type": "stat",
+        "gridPos": {"h": 6, "w": 24, "x": 0, "y": 0},
+        "targets": [
+          {
+            "target": "stats.gauges.grpc.*.throughput",
+            "refId": "A"
+          },
+          {
+            "target": "stats.gauges.websocket.*.message_throughput", 
+            "refId": "B"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps",
+            "color": {"mode": "palette-classic"},
+            "custom": {"displayMode": "list", "orientation": "auto"}
+          }
+        }
+      },
+      {
+        "id": 2,
+        "title": "📡 gRPC Request Throughput (RPS)",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 6},
+        "targets": [
+          {
+            "target": "aliasByNode(stats.gauges.grpc.*.throughput, 2, 3)",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 3,
+        "title": "🔌 WebSocket Message Throughput (msg/sec)",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 6},
+        "targets": [
+          {
+            "target": "aliasByNode(stats.gauges.websocket.*.message_throughput, 2, 3)",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "msg/sec",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 4,
+        "title": "⏱️ gRPC Request Latency",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 14},
+        "targets": [
+          {
+            "target": "aliasByNode(stats.timers.grpc.*.latency.mean, 2, 3, 4)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(stats.timers.grpc.*.latency.upper_90, 2, 3, 4)", 
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(stats.timers.grpc.*.latency.upper_95, 2, 3, 4)",
+            "refId": "C"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "µs",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 5,
+        "title": "⏱️ WebSocket Message Latency",
+        "type": "timeseries", 
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 14},
+        "targets": [
+          {
+            "target": "aliasByNode(stats.timers.websocket.*.message_latency.mean, 2, 3, 4)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(stats.timers.websocket.*.message_latency.upper_90, 2, 3, 4)",
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(stats.timers.websocket.*.message_latency.upper_95, 2, 3, 4)",
+            "refId": "C"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "µs",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 6,
+        "title": "✅ Success Rates",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 22},
+        "targets": [
+          {
+            "target": "aliasByNode(stats.gauges.grpc.*.success_rate, 2, 3)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(stats.gauges.websocket.*.message_success_rate, 2, 3)",
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(stats.gauges.websocket.*.connection_success_rate, 2, 3)",
+            "refId": "C"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "min": 0,
+            "max": 100,
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 7,
+        "title": "📊 Request/Message Counts",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 22},
+        "targets": [
+          {
+            "target": "aliasByNode(summarize(stats.counters.grpc.*.requests.success, '1min'), 2, 3, 4)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.grpc.*.requests.error, '1min'), 2, 3, 4)",
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.websocket.*.messages.sent, '1min'), 2, 3, 4)",
+            "refId": "C"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.websocket.*.messages.received, '1min'), 2, 3, 4)",
+            "refId": "D"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 8,
+        "title": "🔌 WebSocket Connection Metrics",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 30},
+        "targets": [
+          {
+            "target": "aliasByNode(summarize(stats.counters.websocket.*.connections.established, '1min'), 2, 3, 4)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.websocket.*.connections.closed, '1min'), 2, 3, 4)",
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(stats.timers.websocket.*.connection_time.mean, 2, 3, 4)",
+            "refId": "C"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 9,
+        "title": "📈 gRPC Service-Specific Metrics",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 30},
+        "targets": [
+          {
+            "target": "aliasByNode(summarize(stats.counters.grpc.hello.requests, '1min'), 2, 3)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.grpc.compute.requests, '1min'), 2, 3)",
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.grpc.echo.requests, '1min'), 2, 3)",
+            "refId": "C"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.grpc.stream.messages_sent, '1min'), 2, 3, 4)",
+            "refId": "D"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      },
+      {
+        "id": 10,
+        "title": "🎯 Load Test Scenario Performance",
+        "type": "table",
+        "gridPos": {"h": 10, "w": 24, "x": 0, "y": 38},
+        "targets": [
+          {
+            "target": "aliasByNode(stats.gauges.grpc.*.throughput, 2, 3)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(stats.gauges.grpc.*.success_rate, 2, 3)",
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(stats.timers.grpc.*.avg_latency, 2, 3, 4)",
+            "refId": "C"
+          },
+          {
+            "target": "aliasByNode(stats.gauges.websocket.*.message_throughput, 2, 3)",
+            "refId": "D"
+          },
+          {
+            "target": "aliasByNode(stats.gauges.websocket.*.message_success_rate, 2, 3)",
+            "refId": "E"
+          },
+          {
+            "target": "aliasByNode(stats.timers.websocket.*.avg_message_latency, 2, 3, 4)",
+            "refId": "F"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {"displayMode": "color-background", "filterable": true},
+            "unit": "short"
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byRegexp", "options": "throughput|message_throughput"},
+              "properties": [{"id": "unit", "value": "reqps"}]
+            },
+            {
+              "matcher": {"id": "byRegexp", "options": "success_rate|message_success_rate"},
+              "properties": [{"id": "unit", "value": "percent"}, {"id": "min", "value": 0}, {"id": "max", "value": 100}]
+            },
+            {
+              "matcher": {"id": "byRegexp", "options": "latency|avg_latency|avg_message_latency"},
+              "properties": [{"id": "unit", "value": "µs"}]
+            }
+          ]
+        }
+      },
+      {
+        "id": 11,
+        "title": "⚠️ Error Analysis",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 48},
+        "targets": [
+          {
+            "target": "aliasByNode(summarize(stats.counters.grpc.*.requests.error, '1min'), 2, 3, 4)",
+            "refId": "A"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.websocket.*.connections.error, '1min'), 2, 3, 4)",
+            "refId": "B"
+          },
+          {
+            "target": "aliasByNode(summarize(stats.counters.websocket.*.messages.send_error, '1min'), 2, 3, 4)",
+            "refId": "C"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {"mode": "palette-classic"},
+            "custom": {"stacking": {"mode": "normal"}}
+          }
+        }
+      },
+      {
+        "id": 12,
+        "title": "🖥️ Server Health Metrics",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 48},
+        "targets": [
+          {
+            "target": "stats.counters.grpc.server.started",
+            "refId": "A"
+          },
+          {
+            "target": "stats.counters.websocket.server.started",
+            "refId": "B"
+          },
+          {
+            "target": "stats.gauges.websocket.connections.active",
+            "refId": "C"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short",
+            "color": {"mode": "palette-classic"}
+          }
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "name": "test_type",
+          "type": "query",
+          "query": "stats.gauges.grpc.*",
+          "regex": "/stats\\.gauges\\.grpc\\.([^.]*)/",
+          "multi": true,
+          "includeAll": true,
+          "allValue": "*"
+        },
+        {
+          "name": "websocket_test_type", 
+          "type": "query",
+          "query": "stats.gauges.websocket.*",
+          "regex": "/stats\\.gauges\\.websocket\\.([^.]*)/",
+          "multi": true,
+          "includeAll": true,
+          "allValue": "*"
+        }
+      ]
+    },
+    "annotations": {
+      "list": [
+        {
+          "name": "Load Test Start",
+          "datasource": "-- Grafana --",
+          "iconColor": "green",
+          "tags": ["loadtest", "start"]
+        },
+        {
+          "name": "Load Test End",
+          "datasource": "-- Grafana --", 
+          "iconColor": "red",
+          "tags": ["loadtest", "end"]
+        }
+      ]
+    }
+  }
+}
