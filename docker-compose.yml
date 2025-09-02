@@ -5,9 +5,9 @@ services:
   statsd:
     image: graphiteapp/graphite-statsd:latest
     ports:
-      - "80:80"
-      - "8125:8125/udp"
-      - "8126:8126"
+      - "8080:80"
+      - "18125:8125/udp"
+      - "18126:8126"
     volumes:
       - graphite_data:/opt/graphite/storage/whisper
     networks:
@@ -17,7 +17,7 @@ services:
   grafana:
     image: grafana/grafana:latest
     ports:
-      - "3000:3000"
+      - "3100:3000"
     environment:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
@@ -32,7 +32,7 @@ services:
   rest-server:
     build: ./backend
     ports:
-      - "9000:9000"
+      - "9100:9000"
     networks:
       - backend
 
