@@ -144,9 +144,9 @@ const file_proto_hello_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x1c\n" +
 	"\ttimestamp\x18\x02 \x01(\tR\ttimestamp\x12&\n" +
 	"\x0fpayload_size_kb\x18\x03 \x01(\x05R\rpayloadSizeKb\x12\x18\n" +
-	"\apayload\x18\x04 \x01(\tR\apayload2G\n" +
-	"\fHelloService\x127\n" +
-	"\bSayHello\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponse\"\x00B\x13Z\x11grpc-server/protob\x06proto3"
+	"\apayload\x18\x04 \x01(\tR\apayload2I\n" +
+	"\fHelloService\x129\n" +
+	"\bSayHello\x12\x13.hello.HelloRequest\x1a\x14.hello.HelloResponse\"\x000\x01B\x13Z\x11grpc-server/protob\x06proto3"
 
 var (
 	file_proto_hello_proto_rawDescOnce sync.Once

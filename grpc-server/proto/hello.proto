@@ -5,7 +5,7 @@ package hello;
 option go_package = "grpc-server/proto";
 
 service HelloService {
-  rpc SayHello (HelloRequest) returns (HelloResponse) {}
+  rpc SayHello (HelloRequest) returns (stream HelloResponse) {}
 }
 
 message HelloRequest {

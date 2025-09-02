@@ -1,12 +1,24 @@
-FROM golang:1.21 AS builder
+# Stage 1: Build
+FROM golang:1.24.6 AS builder
+
 WORKDIR /app
 
-COPY . .
-RUN go mod tidy
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o grpc-server .
+# Copy go mod dan sum
+COPY go.mod go.sum ./
+RUN go mod download
 
+# Copy source code
+COPY . .
+
+# Build binary untuk gRPC server
+RUN go build -o grpc-server main.go
+
+# Stage 2: Runtime
 FROM debian:bullseye-slim
+
 WORKDIR /app
 COPY --from=builder /app/grpc-server .
-EXPOSE 9001
+
+EXPOSE 9000
+
 CMD ["./grpc-server"]
