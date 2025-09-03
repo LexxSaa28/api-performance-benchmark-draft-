@@ -1,0 +1,1 @@
+GET ws://ws-server:9002/ws
