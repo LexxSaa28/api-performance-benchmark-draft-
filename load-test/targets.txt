@@ -1,3 +1,0 @@
-GET http://rest-server:9200/
-GET http://grpc-server:9001/
-GET http://ws-server:9002/

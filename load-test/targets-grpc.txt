@@ -1,0 +1,4 @@
+POST http://grpc-server:9001/echo
+Content-Type: application/json
+
+{"message": "hello"}

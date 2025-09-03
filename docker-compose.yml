@@ -55,6 +55,9 @@ services:
   # Load Test Client
   load-test:
     build: ./load-test
+    tty: true
+    stdin_open: true
+    working_dir: /app
     depends_on:
       - rest-server
       - grpc-server
@@ -64,6 +67,8 @@ services:
       - monitoring
     volumes:
       - ./results:/app/results
+    command: tail -f /dev/null
+
 
 volumes:
   graphite_data:
