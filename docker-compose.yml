@@ -67,6 +67,7 @@ services:
       - monitoring
     volumes:
       - ./results:/app/results
+      - ./load-test:/app 
     command: tail -f /dev/null
 
 

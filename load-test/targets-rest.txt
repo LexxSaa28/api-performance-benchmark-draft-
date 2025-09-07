@@ -1,1 +1,0 @@
-GET http://rest-server:9000/
