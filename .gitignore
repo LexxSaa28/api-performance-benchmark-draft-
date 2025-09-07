@@ -1,0 +1,29 @@
+# Binaries & build
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go build cache & profiling
+*.log
+*.bin
+*.prof
+*.coverprofile
+
+# Load test results
+results.bin
+report.txt
+report.html
+
+# IDE/editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
