@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	pb "grpc-server/proto"
-	"load-test/stats"
+	pb "github.com/IrzhaAdji28/api-performance-benchmark-draft-/grpc-server/proto"
+	"github.com/IrzhaAdji28/api-performance-benchmark-draft-/load-test/stats"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
