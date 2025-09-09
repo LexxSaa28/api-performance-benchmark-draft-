@@ -1,13 +1,12 @@
 package main
 
 import (
-	"context"
 	"log"
 	"os"
 	"time"
 
-	"load-test/clients"
-	"load-test/stats"
+	"github.com/IrzhaAdji28/api-performance-benchmark-draft-/load-test/clients"
+	"github.com/IrzhaAdji28/api-performance-benchmark-draft-/load-test/stats"
 
 	"github.com/spf13/cobra"
 )

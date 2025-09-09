@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package hello;
 
-option go_package = "grpc-server/proto";
+option go_package = "github.com/IrzhaAdji28/api-performance-benchmark-draft-/grpc-server/proto";
 
 service HelloService {
   rpc SayHello (HelloRequest) returns (stream HelloResponse) {}

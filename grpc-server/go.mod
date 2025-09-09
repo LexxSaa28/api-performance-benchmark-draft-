@@ -1,4 +1,4 @@
-module grpc-server
+module github.com/IrzhaAdji28/api-performance-benchmark-draft-/grpc-server
 
 go 1.24.6
 

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"load-test/stats"
+	"github.com/IrzhaAdji28/api-performance-benchmark-draft-/load-test/stats"
 
 	"github.com/gorilla/websocket"
 )

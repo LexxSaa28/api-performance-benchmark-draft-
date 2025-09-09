@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	pb "grpc-server/proto"
+	pb "github.com/IrzhaAdji28/api-performance-benchmark-draft-/grpc-server/proto"
 
 	"google.golang.org/grpc"
 )
